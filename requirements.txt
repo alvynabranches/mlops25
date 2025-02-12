@@ -5,3 +5,5 @@ opencv-python
 pandas
 openpyxl
 python-multipart
+opencv-python-headless
+tf-keras
