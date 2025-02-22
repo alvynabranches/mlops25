@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app
+    environment:
+      - MODEL_NAME=sentence-transformers/all-MiniLM-L6-v2
+      - VDB_URL=http://vdb:6333
+    develop:
+      watch:
+        - path: ./requirements.txt
+          target: /app/requirements.txt
+          action: rebuild
+        - path: ./
+          target: /app
+          action: sync
+
+  # Vector Database
+  vdb:
+    image: qdrant/qdrant:latest
+    restart: always
+    ports:
+      - 6333:6333
+    volumes:
+      - ./qdrant:/qdrant/storage
+
+  #  Monitoring the RAG application
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - 9090:9090

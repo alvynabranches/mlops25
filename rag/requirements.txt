@@ -1,0 +1,15 @@
+aiofiles
+fastapi
+langchain
+langchain-community
+py-grpc-prometheus
+pypdf
+python-multipart
+sentence-transformers
+qdrant-client
+uvicorn
+opentelemetry-distro
+opentelemetry-instrumentation-fastapi
+opentelemetry-instrumentation-logging
+opentelemetry-exporter-otlp
+prometheus-client
