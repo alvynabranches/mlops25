@@ -1,0 +1,16 @@
+services:
+  # ed:
+  #   build: .
+  #   ports:
+  #     - "8000:80"
+  #   command: uvicorn app:app --host 0.0.0.0 --port 80 --reload
+  #   volumes:
+  #     - ./app.py:/app/app.py
+
+  auth:
+    build:
+      context: .
+      dockerfile: auth.Dockerfile
+    command: uvicorn app:app --host 0.0.0.0 --port 80 --reload
+    volumes:
+      - ./auth.py:/app/auth.py
